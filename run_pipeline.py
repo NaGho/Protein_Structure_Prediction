@@ -1,14 +1,14 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
-from scripts.preprocess import preprocess_data, encode_sequences
+from scripts.preprocess import preprocess_data, encode_sequences, read_data
 from models.LSTM import create_model
 from tensorflow.keras.callbacks import EarlyStopping
-from scripts.utils import plot_metrics
+from scripts.plots import plot_metrics
+from IPython.display import display
 
-# Load the dataset
-data_url = "https://ftp.uniprot.org/pub/databases/uniprot/current_release/knowledgebase/complete/uniprot_sprot.dat.gz"
-print("Downloading dataset...")
-protein_data = pd.read_csv(data_url, compression='gzip', sep="\t")
+
+protein_data = read_data()
+display(protein_data)
 
 # Preprocess the dataset
 processed_data = preprocess_data(protein_data)
